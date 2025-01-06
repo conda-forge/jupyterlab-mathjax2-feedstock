@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
   sha256: 1748fc09e18ef6f878670e400932dc3a08db012d97f4680c238a3a38f7af2461
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -21,9 +21,9 @@ requirements:
     - hatchling >=1.5.0
     - jupyterlab >=4,<5
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   commands:
@@ -34,6 +34,7 @@ test:
     - pip
     - jupyterlab >=4.0
     - m2-grep  # [win]
+    - python {{ python_min }}
 
 about:
   home: https://github.com/jupyterlab/jupyter-renderers
